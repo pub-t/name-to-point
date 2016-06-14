@@ -1,32 +1,16 @@
 var request = require('supertest');
 var app = require('../app');
-describe("post should return json", function (){
+describe("transforms the name of the object in a coordinate", function (){
 
-    it("posts a new user to /users", function(done){
-        var json = {
-            "place_id": "122867135",
-            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright",
-            "osm_type": "way",
-            "osm_id": "256182825",
-            "boundingbox": [
-                "53.701227",
-                "53.702108",
-                "23.833112",
-                "23.8368386"
-            ],
-            "lat": "53.70177645",
-            "lon": "23.8347894179425",
-            "display_name": "OldCity, 17, улица Дубко, Девятовка, Ленинский район, Hrodna, Hrodna region, 230012, Belarus",
-            "class": "shop",
-            "type": "mall",
-            "importance": 0.101
-        };
+    it("Input place name-string,base coordinate, return coordinate and full name point", function(done){
 
-        request("http://localhost:7788")
-            .post("/api")
-            .send('name')
+        request(app)
+            .post("localhost:7788/serchСoordinate")
+            .send({SearchString:'Oldcity', BaseСoordinate: {lat: "53.93892", lon: "28.6496"}}) //текс + координата базовая
             .expect(200)
-            .expect(json, done);
+            .expect({lat: "53.70177645", lon: "23.8347894179425",
+                display_name: "OldCity, 17, улица Дубко, Девятовка, Ленинский район, Hrodna, Hrodna region, 230012, Belarus"});
+            done();
         
     });
 });
