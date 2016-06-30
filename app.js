@@ -4,16 +4,16 @@ const http = require('http');
 const app = express();
 const nconf = require('./config');
 
-app.get('/point', function (req, res, next) {
+app.get('/point', (req, res, next) => {
   const myBody = req.query;
-  const search = myBody.name + ',' + myBody.lat + ' ' + myBody.lon;
-  const searchURL = 'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(search) +
-    '&format=json';
+  const search = `${myBody.name},${myBody.lat},${myBody.lon}`;
+  const searchURL = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(search)}
+  &format=json`;
   let resultJSON;
   let valueOfDisplayName;
   let valueOfLat;
   let valueOfLon;
-  request({ url: searchURL }, function (err, response, data) {
+  request({ url: searchURL }, (err, response, data) => {
     if (err) return next(err);
     JSON.parse(data, (key, value) => {
       if (key === 'display_name') {
@@ -31,7 +31,7 @@ app.get('/point', function (req, res, next) {
         lon: valueOfLon,
       };
     });
-    res.send(resultJSON);
+    return res.send(resultJSON);
   });
 });
 const server = http.createServer(app);
