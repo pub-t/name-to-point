@@ -17,8 +17,8 @@ describe('transforms the name of the object in a coordinate', function () {
           .expect({
             lat: '53.70177645',
             lon: '23.8347894179425',
-            display_name: 'OldCity, 17, улица Дубко, Девятовка, Ленинский район, ' +
-            'Hrodna, Hrodna region, 230012, Belarus',
+            display_name: '27/1, улица Лиможа, Девятовка–4, Ленинский район, ' +
+            'Hrodna, Hrodna region, 230021, Belarus',
           })
           .end(function (err, res) {
             if (err) {
