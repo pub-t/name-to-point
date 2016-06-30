@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
-describe('transforms the name of the object in a coordinate', function () {
-  it('Input place name-string,base coordinate, return coordinate and full name point',
+describe('name to point', function () {
+  it('should return JSON object with geolocation',
       function (done) {
         request(app)
           .get('/point?name=OldCity&lat=53.66&lon=23.83')
