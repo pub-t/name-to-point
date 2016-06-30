@@ -11,7 +11,7 @@ describe('transforms the name of the object in a coordinate', function () {
               lat: '53.663482',
               lon: '23.834427',
             },
-            to: 'ул. Лиможа 27/1',
+            name: 'ул. Лиможа 27/1',
           })
           .expect(200)
           .expect({
