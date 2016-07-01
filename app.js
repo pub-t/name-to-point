@@ -15,6 +15,11 @@ app.get('/point', (req, res, next) => {
   let valueOfLon;
   request({ url: searchURL }, (err, response, data) => {
     if (err) return next(err);
+    if (data.length === 2) {
+      const myError = new Error('Поиск не дал результатов');
+      myError.status = 404;
+      return next(myError);
+    }
     JSON.parse(data, (key, value) => {
       if (key === 'display_name') {
         valueOfDisplayName = value;
@@ -34,6 +39,12 @@ app.get('/point', (req, res, next) => {
     return res.send(resultJSON);
   });
 });
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send(err.message || 'Ошибка');
+});
+
 const server = http.createServer(app);
 
 server.listen(nconf.get('port'));
