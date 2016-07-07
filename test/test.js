@@ -19,7 +19,7 @@ describe('name to point', function () {
             done();
           });
       });
-  it('should return an error',
+  it('should respond with Not Found in case of failed name resolution',
     function (done) {
       request(app)
         .get('/point?name=NONAME&lat=53.66&lon=23.83')
