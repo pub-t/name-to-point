@@ -19,4 +19,16 @@ describe('name to point', function () {
             done();
           });
       });
+  it('should return an error',
+    function (done) {
+      request(app)
+        .get('/point?name=NONAME&lat=53.66&lon=23.83')
+        .expect(404)
+        .end(function (err, res) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
 });
