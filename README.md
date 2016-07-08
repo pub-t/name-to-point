@@ -1,9 +1,9 @@
 # name-to-point
-`Преобразует локальное имя объекта в координату`
+Преобразует локальное имя объекта в координату
 
 ### Install dependencies
 `npm install`
 
 ### How to run?
-* **MacOS or Linux**
+* **Multi-OS**
 `npm start`
