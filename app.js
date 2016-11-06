@@ -40,6 +40,20 @@ app.get('/point', (req, res, next) => {
   });
 });
 
+app.get('/location', (req, res, next) => {
+  const nameOfLocation = req.query.name;
+  let basicSearchPoint = req.query.base;
+  if (!nameOfLocation) {
+    const queryError = new Error('Bad request. Query "name" is not found or missing');
+    queryError.status = 400;
+    return next(queryError);
+  }
+  if (!basicSearchPoint) {
+    basicSearchPoint = 'Гродно';
+  }
+  res.send();
+});
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send(err.message || 'Ошибка');
