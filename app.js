@@ -78,8 +78,15 @@ app.get('/location', (req, res, next) => { // eslint-disable-line consistent-ret
   });
 });
 
-app.get('/address', (req, res, next) => {
-
+app.get('/address', (req, res, next) => { // eslint-disable-line consistent-return
+  const lat = parseFloat(req.query.lat);
+  const lon = parseFloat(req.query.lon);
+  if (!Number(lat) || !Number(lon)) {
+    const numberError = new Error('Query params is not a Number or query is not found or missing');
+    numberError.statusCode = 401;
+    return next(numberError);
+  }
+  res.send();
 });
 
 app.use((err, req, res, next) => {
