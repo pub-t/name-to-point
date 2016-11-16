@@ -78,6 +78,10 @@ app.get('/location', (req, res, next) => { // eslint-disable-line consistent-ret
   });
 });
 
+app.get('/address', (req, res, next) => {
+
+});
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send(err.message || 'Ошибка');
