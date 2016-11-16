@@ -86,7 +86,27 @@ app.get('/address', (req, res, next) => { // eslint-disable-line consistent-retu
     numberError.statusCode = 401;
     return next(numberError);
   }
-  res.send();
+  const queryString = `${lat}, ${lon}`;
+  const queryURL = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(queryString)}
+  &format=json`;
+  request(queryURL, (err, response, data) => {
+    if (err) return next(err);
+    if (response.statusCode !== 200) {
+      const requestError = new Error('Search returns Not Found');
+      requestError.status = 404;
+      return next(requestError);
+    }
+    const parseJSONData = JSON.parse(data);
+    const result = _
+            .chain(parseJSONData)
+            .map((o) => { // eslint-disable-line arrow-body-style
+              return {
+                name: o.display_name,
+              };
+            })
+            .valueOf();
+    return res.send(result);
+  });
 });
 
 app.use((err, req, res, next) => {
