@@ -9,7 +9,7 @@
 `npm start`
 
 ### How to work?
-- `GET /location`  for get geolocation points. Example:
+- `GET /location`  to get geolocation points. Example:
 ```
 GET /location?name=ул.%20Лиможа&base=Гродно
 [
@@ -20,5 +20,14 @@ GET /location?name=ул.%20Лиможа&base=Гродно
       lon: "23.8496624"
    },
 ...
+]
+```
+- `GET /address` to get address. Example:
+```
+GET /address?lat=53.70177645&lon=23.8347894179425
+[
+   {
+      name: "OldCity, 17, улица Дубко, Девятовка, Ленинский район, Гродно, Гродненская область, 230005, Беларусь"
+   }
 ]
 ```
